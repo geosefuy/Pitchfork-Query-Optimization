@@ -12,11 +12,11 @@ const { loadPageFourSix, fourSixQuery } = require('./routes/four_six_table');
 // Don't forget to create the db here!
 // Local DB connection
 const db = mysql.createConnection({   
-    host: 'localhost',
+    host: '34.87.150.174',
     user: 'root',
     password: '1234',
     port: 3306,
-    database: 'northwind'
+    database: 'pitchfork'
 });
 
 // Connect to the database

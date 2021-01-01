@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
         <div class="col-sm">
-            <form action="one_table/getquery1" method="get">
+            <form action="/one_table/getquery1" method="get">
                 <label for="query1" class="form-label">Query 1:</label>
                 <input type="text" class="form-control">
                 <br>
@@ -20,7 +20,7 @@
             </form>
         </div>
         <div class="col-sm">
-            <form action="one_table/getquery2" method="get">
+            <form action="/one_table/getquery2" method="get">
                 <label for="query2" class="form-label">Query 2:</label>
                 <input type="text" class="form-control">
                 <br>
@@ -35,18 +35,14 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">Artist</th>
                 </tr>
             </thead>
             <tbody>
                 <% results.forEach((record, index) => { %>
                     <tr>
-                        <th scope="row"><%= record.id %></th>
-                        <td><%= record.name %></td>
-                        <td><%= record.email %></td>
-                        <td>@<%= record.user_name %></td>
+                        <th scope="row"><%= record.reviewid %></th>
+                        <td><%= record.artist %></td>
                     </tr>
                 <% }) %>
             </tbody>

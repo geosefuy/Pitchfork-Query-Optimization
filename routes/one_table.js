@@ -7,7 +7,7 @@ module.exports = {
     },
     oneQuery1: (req, res) => {
         //query here
-        let query = "";
+        let query = "SELECT * FROM artists";
 
         db.query(query, (err, output) => {
             if (err) res.redirect('/'); 
