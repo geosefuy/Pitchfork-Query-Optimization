@@ -12,47 +12,63 @@
     <div class="container">
         <div class="row">
         <div class="col-sm">
-            <form action="/two_table/getquery1" method="get">
-                <label for="query1" class="form-label">Query 1:</label>
-                <input type="text" class="form-control">
+            <form action="/two_table/getquery1" method="post">
+                <label for="query1" class="form-label">Query 1: From albums made in each year from X - X (ex. 2007 - 2010), find the most prominent reviewers (3) out of all reviewers in the website</label>
+                <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query1_1">
+                <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query1_2">
                 <br>
                 <input class="btn btn-primary mr-3" type="submit" value="Search">
             </form>
         </div>
         <div class="col-sm">
-            <form action="/two_table/getquery2" method="get">
-                <label for="query2" class="form-label">Query 2:</label>
-                <input type="text" class="form-control">
+            <form action="/two_table/getquery2" method="post">
+                <label for="query2" class="form-label">Query 2: Least reviewed genre in a given year (ex. 2007)</label>
+                <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query2">
                 <br>
                 <input class="btn btn-primary mr-3" type="submit" value="Search">
             </form>
         </div>
         </div>
       </div>
-    <% if (results) { %>
+    <% if (result1) { %>
     <div class="table-wrapper">
         <table class="table table-hovered">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Number of Reviews</th>
                 </tr>
             </thead>
             <tbody>
-                <% results.forEach((record, index) => { %>
+                <% result1.forEach((record, index) => { %>
                     <tr>
-                        <th scope="row"><%= record.id %></th>
-                        <td><%= record.name %></td>
-                        <td><%= record.email %></td>
-                        <td>@<%= record.user_name %></td>
+                        <th scope="col"><%= record.author %></th>
+                        <td><%= record.reviewCount %></td>
                     </tr>
                 <% }) %>
             </tbody>
         </table>
     </div>
     <% } %>
-    
+    <% if (result2) { %>
+        <div class="table-wrapper">
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Number of Reviews</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% result2.forEach((record, index) => { %>
+                        <tr>
+                            <td><%= record.genre %></td>
+                            <td><%= record.reviewCount %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
 </body>
 </html>

@@ -12,9 +12,10 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <form action="/foursix_table/getquery" method="get">
-                    <label for="query1" class="form-label">Query 1:</label>
-                    <input type="text" class="form-control">
+                <form action="/foursix_table/getquery" method="post">
+                    <label for="query1" class="form-label">Query: Complete album details of the top 10 albums reviewed in X of X (ex. February of 2010) with a score less than the previous yearly (release year) average</label>
+                    <input type="text" class="form-control" placeholder="Month 1 - 12 (January - December)" name="query_1">
+                    <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query_2">
                     <br>
                     <input class="btn btn-primary mr-3" type="submit" value="Search">
                 </form>
@@ -26,19 +27,25 @@
         <table class="table table-hovered">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Username</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Artist</th>
+                    <th scope="col">Label</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Published Date</th>
                 </tr>
             </thead>
             <tbody>
                 <% results.forEach((record, index) => { %>
                     <tr>
-                        <th scope="row"><%= record.id %></th>
-                        <td><%= record.name %></td>
-                        <td><%= record.email %></td>
-                        <td>@<%= record.user_name %></td>
+                        <td><%= record.title %></td>
+                        <td><%= record.artist %></td>
+                        <td><%= record.label %></td>
+                        <td><%= record.genre %></td>
+                        <td><%= record.year %></td>
+                        <td><%= record.score %></td>
+                        <td><%= record.pub_date %></td>
                     </tr>
                 <% }) %>
             </tbody>

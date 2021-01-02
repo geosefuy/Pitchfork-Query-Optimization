@@ -1,5 +1,6 @@
 /* Import statements */
 const express = require('express');
+const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const app = express();
 const port = 8080; 
@@ -33,22 +34,22 @@ global.db = db;
 app.set('port', process.env.port || port); // set express to use this port
 app.set('view engine', 'ejs');             // configure template engine
 app.set('views', __dirname + '/views');    // view folder config
-app.use(express.urlencoded({extended: true}));
-app.use(express.json()); // parse formdata client
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json()); // parse formdata client
 
 // App routes
 app.get('/', loadPageOne);
 app.get('/one_table', loadPageOne);
-app.get('/one_table/getquery1', oneQuery1);
-app.get('/one_table/getquery2', oneQuery2);
+app.post('/one_table/getquery1', oneQuery1);
+app.post('/one_table/getquery2', oneQuery2);
 app.get('/two_table', loadPageTwo);
-app.get('/two_table/getquery1', twoQuery1);
-app.get('/two_table/getquery2', twoQuery2);
+app.post('/two_table/getquery1', twoQuery1);
+app.post('/two_table/getquery2', twoQuery2);
 app.get('/three_table', loadPageThree);
-app.get('/three_table/getquery1', threeQuery1);
-app.get('/three_table/getquery2', threeQuery2);
+app.post('/three_table/getquery1', threeQuery1);
+app.post('/three_table/getquery2', threeQuery2);
 app.get('/foursix_table', loadPageFourSix);
-app.get('/foursix_table/getquery', fourSixQuery);
+app.post('/foursix_table/getquery', fourSixQuery);
 
 // Set the port the app will listen on
 app.listen(port, () => {
