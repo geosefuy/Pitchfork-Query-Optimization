@@ -6,6 +6,9 @@
     <title><%= title %></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script>
+        $("input[type='number']").inputSpinner()
+    </script>
 </head>
 <body>
     <%- include ("navbar.ejs", {one: false, two: false, three: true, foursix: false}) %>
@@ -14,7 +17,7 @@
         <div class="col-sm">
             <form action="/three_table/getquery1" method="post">
                 <label for="query1" class="form-label">Query 1: Average, maximum, and minimum scores of albums released in a given year (ex. 2007) divided by genre</label>
-                <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query1">
+                <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query1" min="1959" max="2017">
                 <br>
                 <input class="btn btn-primary mr-3" type="submit" value="Search">
             </form>
@@ -22,8 +25,21 @@
         <div class="col-sm">
             <form action="/three_table/getquery2" method="post">
                 <label for="query2" class="form-label">Query 2: Last reviews given per month of X (ex. 2015) for X (ex. rock) albums released in the same year.</label>
-                <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query2_1">
-                <input type="text" class="form-control" placeholder="Genre ex. rock, electronic, metal, rap" name="query2_2">
+                <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query2_1" min="1999" max="2017">
+                <select class="form-control" name="query2_2">
+                    <option selected disabled>Genre ex. rock, electronic</option>
+                    <option>global</option>
+                    <option>jazz</option>
+                    <option>folk/country</option>
+                    <option>metal</option>
+                    <option>pop/r&b</option>
+                    <option>rap</option>
+                    <option>experimental</option>
+                    <option>electronic</option>
+                    <option>rock</option>
+                </select>
+                <!-- <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query2_1">
+                <input type="text" class="form-control" placeholder="Genre ex. rock, electronic, metal, rap" name="query2_2"> -->
                 <br>
                 <input class="btn btn-primary mr-3" type="submit" value="Search">
             </form>
