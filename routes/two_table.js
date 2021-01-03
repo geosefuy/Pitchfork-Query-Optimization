@@ -1,9 +1,11 @@
+const performance = require('perf_hooks').performance;
 module.exports = {
     loadPageTwo: (req, res) => {
         res.render('two_table.ejs', { // Pass data to front end
             title: "Two Table Query",
             result1: false,
-            result2: false
+            result2: false,
+            time: false
         });
     },
     twoQuery1: (req, res) => {
@@ -18,14 +20,16 @@ module.exports = {
                         ORDER BY COUNT(r.author) DESC
                         LIMIT 3`;
         console.log(query);
-        
+        let t0 = performance.now();
         db.query(query, (err, output) => {
+            let time = performance.now() - t0;
             if (err) res.redirect('/'); 
 
             res.render('two_table.ejs', { // Pass data to front end
                 title: "Two Table Query 1", 
                 result1: output,
-                result2: false
+                result2: false,
+                time: time
             });
         });
     },
@@ -45,14 +49,16 @@ module.exports = {
                                     GROUP BY g.genre
                                     ) a )`;
         console.log(query);
-        
+        let t0 = performance.now();
         db.query(query, (err, output) => {
+            let time = performance.now() - t0;
             if (err) res.redirect('/'); 
 
             res.render('two_table.ejs', { // Pass data to front end
                 title: "Two Table Query 2", 
                 result1: false,
-                result2: output
+                result2: output,
+                time: time
             });
         });
     },

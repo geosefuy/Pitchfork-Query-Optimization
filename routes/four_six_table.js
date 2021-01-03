@@ -1,8 +1,10 @@
+const performance = require('perf_hooks').performance;
 module.exports = {
     loadPageFourSix: (req, res) => {
         res.render('four_six_table.ejs', { // Pass data to front end
             title: "Four to Six Table Query",
-            results: false
+            results: false,
+            time: false
         });
     },
     fourSixQuery: (req, res) => {
@@ -27,13 +29,15 @@ module.exports = {
                         ORDER BY r.score DESC
                         LIMIT 10`;
         console.log(query);
-
+        let t0 = performance.now();
         db.query(query, (err, output) => {
+            let time = performance.now() - t0;
             if (err) res.redirect('/'); 
 
             res.render('four_six_table.ejs', { // Pass data to front end
                 title: "Four to Six Table Query", 
                 results: output,
+                time: time
             });
         });
     },

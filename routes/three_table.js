@@ -1,9 +1,11 @@
+const performance = require('perf_hooks').performance;
 module.exports = {
     loadPageThree: (req, res) => {
         res.render('three_table.ejs', { // Pass data to front end
             title: "Three Table Query",
             result1: false,
-            result2: false
+            result2: false,
+            time: false
         });
     },
     threeQuery1: (req, res) => {
@@ -14,14 +16,16 @@ module.exports = {
                         WHERE r.reviewid = y.reviewid AND r.reviewid = g.reviewid AND year = ` + year + `
                         GROUP BY y.year, g.genre`;
         console.log(query);
-        
+        let t0 = performance.now();
         db.query(query, (err, output) => {
+            let time = performance.now() - t0;
             if (err) res.redirect('/');
 
             res.render('three_table.ejs', { // Pass data to front end
                 title: "Three Table Query 1", 
                 result1: output,
-                result2: false
+                result2: false,
+                time: time
             });
         });
     },
@@ -46,14 +50,16 @@ module.exports = {
                         )
                         ORDER BY r.pub_month`;
         console.log(query);
-        
+        let t0 = performance.now();
         db.query(query, (err, output) => {
+            let time = performance.now() - t0;
             if (err) res.redirect('/'); 
 
             res.render('three_table.ejs', { // Pass data to front end
                 title: "Three Table Query 2", 
                 result1: false,
-                result2: output
+                result2: output,
+                time: time
             });
         });
     },

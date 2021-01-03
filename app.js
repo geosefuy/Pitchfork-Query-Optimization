@@ -11,13 +11,20 @@ const { loadPageThree, threeQuery1, threeQuery2 } = require('./routes/three_tabl
 const { loadPageFourSix, fourSixQuery } = require('./routes/four_six_table');
 
 // Don't forget to create the db here!
-// Local DB connection
-const db = mysql.createConnection({   
+// GCLOUD Deployment DB connection
+// const db = mysql.createConnection({
+//     user: process.env.CLOUD_SQL_USERNAME,
+//     password: process.env.CLOUD_SQL_PASSWORD,
+//     database: process.env.CLOUD_SQL_DATABASE_NAME,
+//     socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
+// });
+// Local DB connection with CLOUD SQL
+const db = mysql.createConnection({
     host: '34.87.150.174',
     user: 'root',
     password: '1234',
     port: 3306,
-    database: 'pitchfork'
+    database: 'pitchfork',
 });
 
 // Connect to the database
@@ -36,6 +43,7 @@ app.set('view engine', 'ejs');             // configure template engine
 app.set('views', __dirname + '/views');    // view folder config
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json()); // parse formdata client
+app.set('trust proxy', true);
 
 // App routes
 app.get('/', loadPageOne);

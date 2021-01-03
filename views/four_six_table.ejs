@@ -22,6 +22,11 @@
             </div>
         </div>
     </div>
+    <% if (time) { %>
+    <div class="container time">
+        Query time: <%= time %> milliseconds
+    </div>
+    <% } %>
     <% if (results) { %>
     <div class="table-wrapper">
         <table class="table table-hovered">
