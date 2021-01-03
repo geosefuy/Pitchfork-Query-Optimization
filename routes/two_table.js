@@ -12,6 +12,11 @@ module.exports = {
         //query here
         let year1 = req.body.query1_1;
         let year2 = req.body.query1_2;
+        if (year2 < year1) {
+            let dum = year1;
+            year1 = year2;
+            year2 = dum;
+        }
         let query = `SELECT r.author, COUNT(r.author) reviewCount
                         FROM reviews r, years y
                         WHERE r.reviewid = y.reviewid AND

@@ -34,6 +34,11 @@ module.exports = {
         //query here
         let day1 = req.body.query2_1;
         let day2 = req.body.query2_2;
+        if (day2 < day1) {
+            let dum = day1;
+            day1 = day2;
+            day2 = dum;
+        }
         let query = `SELECT r.author_type, COUNT(r.author) authors
                         FROM reviews r
                         WHERE r.pub_weekday BETWEEN ` + day1 + ` AND ` + day2 + ` AND r.author_type <> ""
