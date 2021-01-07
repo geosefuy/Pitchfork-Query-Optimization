@@ -17,12 +17,21 @@ module.exports = {
             year1 = year2;
             year2 = dum;
         }
-        let query = `SELECT r.author, COUNT(r.author) reviewCount
-                        FROM reviews r, years y
+        // let query = `SELECT r.author, COUNT(r.author) reviewCount
+        //                 FROM reviews r, years y
+        //                 WHERE r.reviewid = y.reviewid AND
+        //                     y.year BETWEEN ` + year1 + ` AND ` + year2 + `
+        //                 GROUP BY r.author
+        //                 ORDER BY COUNT(r.author) DESC
+        //                 LIMIT 3`;
+        let query = `SELECT a.author, COUNT(a.author) reviewCount
+                        FROM reviews r, years y, authors a
                         WHERE r.reviewid = y.reviewid AND
+                            a.authorid = r.authorid 
+                            AND
                             y.year BETWEEN ` + year1 + ` AND ` + year2 + `
-                        GROUP BY r.author
-                        ORDER BY COUNT(r.author) DESC
+                        GROUP BY a.author
+                        ORDER BY COUNT(a.author) DESC
                         LIMIT 3`;
         console.log(query);
         let t0 = performance.now();
