@@ -8,8 +8,11 @@ module.exports = {
              CREATE INDEX years_index ON years (reviewid);`
 
         db.query(query, (err, output) => {
-            if (err) res.redirect('/');
-            console.log(output)
+            if (err) {
+                res.render('error_create.ejs', {
+                    title: "Creating Indices"
+                })
+            }
             
             res.render('one_table.ejs', { // Pass data to front end
                 title: "One Table Query", 
@@ -29,8 +32,11 @@ module.exports = {
              ALTER TABLE years DROP INDEX years_index;`
 
         db.query(query, (err, output) => {
-            if (err) res.redirect('/');
-            console.log(output)
+            if (err) {
+                res.render('error_drop.ejs', {
+                    title: "Dropping Indices"
+                })
+            }
             
             res.render('one_table.ejs', { // Pass data to front end
                 title: "One Table Query", 

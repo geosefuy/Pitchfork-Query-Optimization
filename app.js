@@ -26,6 +26,7 @@ const db = mysql.createConnection({
     password: '1234',
     port: 3306,
     database: 'pitchfork',
+    multipleStatements: true
 });
 
 // Connect to the database
