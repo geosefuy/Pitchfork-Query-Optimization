@@ -7,27 +7,27 @@ const port = 8080;
 
 const { loadPageOne, oneQuery1, oneQuery2 } = require('./routes/one_table');
 const { loadPageTwo, twoQuery1, twoQuery2 } = require('./routes/two_table');
-const { loadPageThree, threeQuery1, threeQuery2 } = require('./routes/three_table');
+const { loadPageThree, threeQuery1, threeQuery2, threeQuery2_opt } = require('./routes/three_table');
 const { loadPageFourSix, fourSixQuery } = require('./routes/four_six_table');
 const { createIndexAndLoadPage, dropIndexAndLoadPage } = require('./routes/index_control');
 
 // Don't forget to create the db here!
 // GCLOUD Deployment DB connection
-// const db = mysql.createConnection({
-//     user: process.env.CLOUD_SQL_USERNAME,
-//     password: process.env.CLOUD_SQL_PASSWORD,
-//     database: process.env.CLOUD_SQL_DATABASE_NAME,
-//     socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-// });
-// Local DB connection with CLOUD SQL
 const db = mysql.createConnection({
-    host: '34.87.150.174',
-    user: 'root',
-    password: '1234',
-    port: 3306,
-    database: 'pitchfork',
-    multipleStatements: true
+    user: process.env.CLOUD_SQL_USERNAME,
+    password: process.env.CLOUD_SQL_PASSWORD,
+    database: process.env.CLOUD_SQL_DATABASE_NAME,
+    socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
 });
+// Local DB connection with CLOUD SQL
+// const db = mysql.createConnection({
+//     host: '34.87.150.174',
+//     user: 'root',
+//     password: '1234',
+//     port: 3306,
+//     database: 'pitchfork',
+//     multipleStatements: true
+// });
 
 // Connect to the database
 db.connect(err => {
@@ -58,6 +58,7 @@ app.post('/two_table/getquery2', twoQuery2);
 app.get('/three_table', loadPageThree);
 app.post('/three_table/getquery1', threeQuery1);
 app.post('/three_table/getquery2', threeQuery2);
+app.post('/three_table/getquery2_opt', threeQuery2_opt);
 app.get('/foursix_table', loadPageFourSix);
 app.post('/foursix_table/getquery', fourSixQuery);
 

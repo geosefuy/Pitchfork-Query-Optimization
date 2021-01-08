@@ -14,36 +14,56 @@
     <%- include ("navbar.ejs", {one: false, two: false, three: true, foursix: false}) %>
     <div class="container">
         <div class="row">
-        <div class="col-sm">
-            <form action="/three_table/getquery1" method="post">
-                <label for="query1" class="form-label">Query 1: Average, maximum, and minimum scores of albums released in a given year (ex. 2007) divided by genre</label>
-                <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query1" min="1959" max="2017">
-                <br>
-                <input class="btn btn-primary mr-3" type="submit" value="Search">
-            </form>
-        </div>
-        <div class="col-sm">
-            <form action="/three_table/getquery2" method="post">
-                <label for="query2" class="form-label">Query 2: Last reviews given per month of X (ex. 2015) for X (ex. rock) albums released in the same year.</label>
-                <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query2_1" min="1999" max="2017">
-                <select class="form-control" name="query2_2">
-                    <option selected disabled>Genre ex. rock, electronic</option>
-                    <option>global</option>
-                    <option>jazz</option>
-                    <option>folk/country</option>
-                    <option>metal</option>
-                    <option>pop/r&b</option>
-                    <option>rap</option>
-                    <option>experimental</option>
-                    <option>electronic</option>
-                    <option>rock</option>
-                </select>
-                <!-- <input type="text" class="form-control" placeholder="Year ex. 1998, 2015" name="query2_1">
-                <input type="text" class="form-control" placeholder="Genre ex. rock, electronic, metal, rap" name="query2_2"> -->
-                <br>
-                <input class="btn btn-primary mr-3" type="submit" value="Search">
-            </form>
-        </div>
+            <div class="col-sm">
+                <form action="/three_table/getquery1" method="post">
+                    <label for="query1" class="form-label">Query 1: Average, maximum, and minimum scores of albums released in a given year (ex. 2007) divided by genre</label>
+                    <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query1" min="1959" max="2017">
+                    <br>
+                    <input class="btn btn-primary mr-3" type="submit" value="Search">
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <form action="/three_table/getquery2" method="post">
+                        <label for="query2" class="form-label">Query 2: Last reviews given per month of X (ex. 2015) for X (ex. rock) albums released in the same year.</label>
+                        <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query2_1" min="1999" max="2017">
+                        <select class="form-control" name="query2_2">
+                            <option selected disabled>Genre ex. rock, electronic</option>
+                            <option>global</option>
+                            <option>jazz</option>
+                            <option>folk/country</option>
+                            <option>metal</option>
+                            <option>pop/r&b</option>
+                            <option>rap</option>
+                            <option>experimental</option>
+                            <option>electronic</option>
+                            <option>rock</option>
+                        </select>
+                        <br>
+                        <input class="btn btn-primary mr-3" type="submit" value="Search">
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <form action="/three_table/getquery2_opt" method="post">
+                        <label for="query2" class="form-label">Query 2 <strong>Optimized</strong>: Last reviews given per month of X (ex. 2015) for X (ex. rock) albums released in the same year.</label>
+                        <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query2_1_opt" min="1999" max="2017">
+                        <select class="form-control" name="query2_2_opt">
+                            <option selected disabled>Genre ex. rock, electronic</option>
+                            <option>global</option>
+                            <option>jazz</option>
+                            <option>folk/country</option>
+                            <option>metal</option>
+                            <option>pop/r&b</option>
+                            <option>rap</option>
+                            <option>experimental</option>
+                            <option>electronic</option>
+                            <option>rock</option>
+                        </select>
+                        <br>
+                        <input class="btn btn-primary mr-3" type="submit" value="Search">
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <% if (time) { %>
@@ -117,6 +137,28 @@
                             <td><%= record.pub_day %></td>
                             <td><%= record.pub_month %></td>
                             <td><%= record.pub_year %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
+    <% if (result2_opt) { %>
+        <div class="table-wrapper">
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% result2_opt.forEach((record, index) => { %>
+                        <tr>
+                            <td><%= record.genre %></td>
+                            <td><%= record.year %></td>
+                            <td><%= record.title %></td>
                         </tr>
                     <% }) %>
                 </tbody>
