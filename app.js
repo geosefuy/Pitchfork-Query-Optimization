@@ -9,6 +9,7 @@ const { loadPageOne, oneQuery1, oneQuery2 } = require('./routes/one_table');
 const { loadPageTwo, twoQuery1, twoQuery2 } = require('./routes/two_table');
 const { loadPageThree, threeQuery1, threeQuery2 } = require('./routes/three_table');
 const { loadPageFourSix, fourSixQuery } = require('./routes/four_six_table');
+const { createIndexAndLoadPage, dropIndexAndLoadPage } = require('./routes/index_control');
 
 // Don't forget to create the db here!
 // GCLOUD Deployment DB connection
@@ -58,6 +59,9 @@ app.post('/three_table/getquery1', threeQuery1);
 app.post('/three_table/getquery2', threeQuery2);
 app.get('/foursix_table', loadPageFourSix);
 app.post('/foursix_table/getquery', fourSixQuery);
+
+app.get("/create_index", createIndexAndLoadPage);
+app.get("/drop_index", dropIndexAndLoadPage);
 
 // Set the port the app will listen on
 app.listen(port, () => {
