@@ -68,12 +68,12 @@ app.post('/two_table/getquery2', twoQuery2);
 app.get('/three_table', loadPageThree);
 app.post('/three_table/getquery1', threeQuery1);
 app.post('/three_table/getquery2', threeQuery2);
-app.post('/three_table/getquery2_opt', threeQuery2_opt);
+// app.post('/three_table/getquery2_opt', threeQuery2_opt);
 app.get('/foursix_table', loadPageFourSix);
 app.post('/foursix_table/getquery', fourSixQuery);
 
-app.get("/create_index", createIndexAndLoadPage);
-app.get("/drop_index", dropIndexAndLoadPage);
+// app.get("/create_index", createIndexAndLoadPage);
+// app.get("/drop_index", dropIndexAndLoadPage);
 
 // Set the port the app will listen on
 app.listen(port, () => {
