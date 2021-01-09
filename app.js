@@ -13,12 +13,12 @@ const { createIndexAndLoadPage, dropIndexAndLoadPage } = require('./routes/index
 
 // Don't forget to create the db here!
 // GCLOUD Deployment DB connection
-const db = mysql.createConnection({
-    user: process.env.CLOUD_SQL_USERNAME,
-    password: process.env.CLOUD_SQL_PASSWORD,
-    database: process.env.CLOUD_SQL_DATABASE_NAME,
-    socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
-});
+// const db = mysql.createConnection({
+//     user: process.env.CLOUD_SQL_USERNAME,
+//     password: process.env.CLOUD_SQL_PASSWORD,
+//     database: process.env.CLOUD_SQL_DATABASE_NAME,
+//     socketPath: `/cloudsql/${process.env.CLOUD_SQL_CONNECTION_NAME}`,
+// });
 // Local DB connection with CLOUD SQL
 // const db = mysql.createConnection({
 //     host: '34.87.150.174',
@@ -28,6 +28,16 @@ const db = mysql.createConnection({
 //     database: 'pitchfork',
 //     multipleStatements: true
 // });
+// Local DB connection with Local SQL 'pitchforks_unoptimized'
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    port: 3306,
+    database: 'pitchfork_unoptimized',
+    multipleStatements: true
+});
+
 
 // Connect to the database
 db.connect(err => {

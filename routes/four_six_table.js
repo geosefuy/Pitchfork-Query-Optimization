@@ -13,17 +13,22 @@ module.exports = {
         let year = req.body.query_2;
         let yearminus = (Number(year) - 1).toString()
         let query = `SELECT r.title, r.artist, l.label, g.genre, y.year, r.score, r.pub_date
-                        FROM reviews r, labels l, genres g, years y
-                        WHERE r.reviewid = l.reviewid 
-                        AND r.reviewid = g.reviewid 
-                        AND r.reviewid = y.reviewid 
-                        AND r.pub_month = ` + month + ` 
+                        FROM reviews r
+                        JOIN labels l
+                        ON r.reviewid = l.reviewid 
+                        JOIN genres g
+                        ON r.reviewid = g.reviewid 
+                        JOIN years y
+                        ON r.reviewid = y.reviewid 
+                        WHERE r.pub_month = ` + month + ` 
                         AND r.pub_year = ` + year + ` 
                         AND y.year = ` + year + ` 
                         AND r.score < (
                             SELECT AVG(r2.score)
-                            FROM reviews r2, years y2
-                            WHERE r2.reviewid = y2.reviewid AND y2.year = ` + yearminus + `
+                            FROM reviews r2
+                            JOIN years y2
+                            ON r2.reviewid = y2.reviewid
+                            WHERE y2.year = ` + yearminus + `
                             GROUP BY y2.year
                         )
                         ORDER BY r.score DESC

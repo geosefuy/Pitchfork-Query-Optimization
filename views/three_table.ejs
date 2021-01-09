@@ -22,7 +22,6 @@
                     <input class="btn btn-primary mr-3" type="submit" value="Search">
                 </form>
             </div>
-            <div class="row">
                 <div class="col-sm">
                     <form action="/three_table/getquery2" method="post">
                         <label for="query2" class="form-label">Query 2: Last reviews given per month of X (ex. 2015) for X (ex. rock) albums released in the same year.</label>
@@ -43,7 +42,7 @@
                         <input class="btn btn-primary mr-3" type="submit" value="Search">
                     </form>
                 </div>
-                <div class="col-sm">
+                <!-- <div class="col-sm">
                     <form action="/three_table/getquery2_opt" method="post">
                         <label for="query2" class="form-label">Query 2 <strong>Optimized</strong>: Last reviews given per month of X (ex. 2015) for X (ex. rock) albums released in the same year.</label>
                         <input type="number" class="form-control" placeholder="Year ex. 1999, 2015" name="query2_1_opt" min="1999" max="2017">
@@ -62,8 +61,7 @@
                         <br>
                         <input class="btn btn-primary mr-3" type="submit" value="Search">
                     </form>
-                </div>
-            </div>
+                </div> -->
         </div>
     </div>
     <% if (time) { %>
@@ -110,8 +108,8 @@
                         <th scope="col">URL</th>
                         <th scope="col">Score</th>
                         <th scope="col">Best New Music</th>
-                        <th scope="col">Author</th>
-                        <th scope="col">Author Type</th>
+                        <!-- <th scope="col">Author</th>
+                        <th scope="col">Author Type</th> -->
                         <th scope="col">Published Date</th>
                         <th scope="col">Weekday Published</th>
                         <th scope="col">Published Day</th>
@@ -130,8 +128,8 @@
                             <td><%= record.url %></td>
                             <td><%= record.score %></td>
                             <td><%= record.best_new_music %></td>
-                            <td><%= record.author %></td>
-                            <td><%= record.author_type %></td>
+                            <!-- <td><%= record.author %></td>
+                            <td><%= record.author_type %></td> -->
                             <td><%= record.pub_date %></td>
                             <td><%= record.pub_weekday %></td>
                             <td><%= record.pub_day %></td>

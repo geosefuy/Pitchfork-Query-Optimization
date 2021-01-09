@@ -39,17 +39,17 @@ module.exports = {
             day1 = day2;
             day2 = dum;
         }
-        let query = `SELECT r.author_type, COUNT(r.author) authors
-                        FROM reviews r
-                        WHERE r.pub_weekday BETWEEN ` + day1 + ` AND ` + day2 + ` AND r.author_type <> ""
-                        GROUP BY r.author_type`;
+        // let query = `SELECT r.author_type, COUNT(r.author) authors
+        //                 FROM reviews r
+        //                 WHERE r.pub_weekday BETWEEN ` + day1 + ` AND ` + day2 + ` AND r.author_type <> ""
+        //                 GROUP BY r.author_type`;
         // normalized query
-        // let query = `SELECT t.author_type, COUNT(t.author_type) authors
-        //             FROM reviews r, author_types t
-        //             WHERE r.author_type_id = t.author_type_id AND 
-        //                 t.author_type <> "" AND 
-        //                 r.pub_weekday BETWEEN ` + day1 + ` AND ` + day2 + `
-        //             GROUP BY t.author_type`;
+        let query = `SELECT t.author_type, COUNT(t.author_type) authors
+                    FROM reviews r, author_types t
+                    WHERE r.author_type_id = t.author_type_id AND 
+                        t.author_type <> "" AND 
+                        r.pub_weekday BETWEEN ` + day1 + ` AND ` + day2 + `
+                    GROUP BY t.author_type`;
 
         console.log(query);
         let t0 = performance.now()

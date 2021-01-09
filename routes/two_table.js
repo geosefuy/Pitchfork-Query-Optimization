@@ -17,23 +17,23 @@ module.exports = {
             year1 = year2;
             year2 = dum;
         }
-        let query = `SELECT r.author, COUNT(r.author) reviewCount
-                        FROM reviews r, years y
-                        WHERE r.reviewid = y.reviewid AND
-                            y.year BETWEEN ` + year1 + ` AND ` + year2 + `
-                        GROUP BY r.author
-                        ORDER BY COUNT(r.author) DESC
-                        LIMIT 3`;
-        // normalized query
-        // let query = `SELECT a.author, COUNT(a.author) reviewCount
-        //                 FROM reviews r, years y, authors a
+        // let query = `SELECT r.author, COUNT(r.author) reviewCount
+        //                 FROM reviews r, years y
         //                 WHERE r.reviewid = y.reviewid AND
-        //                     a.authorid = r.authorid 
-        //                     AND
         //                     y.year BETWEEN ` + year1 + ` AND ` + year2 + `
-        //                 GROUP BY a.author
-        //                 ORDER BY COUNT(a.author) DESC
+        //                 GROUP BY r.author
+        //                 ORDER BY COUNT(r.author) DESC
         //                 LIMIT 3`;
+        // normalized query
+        let query = `SELECT a.author, COUNT(a.author) reviewCount
+                        FROM reviews r, years y, authors a
+                        WHERE r.reviewid = y.reviewid AND
+                            a.authorid = r.authorid 
+                            AND
+                            y.year BETWEEN ` + year1 + ` AND ` + year2 + `
+                        GROUP BY a.author
+                        ORDER BY COUNT(a.author) DESC
+                        LIMIT 3`;
         console.log(query);
         let t0 = performance.now();
         db.query(query, (err, output) => {
@@ -52,15 +52,19 @@ module.exports = {
         //query here
         let year = req.body.query2;
         let query = `SELECT g.genre, COUNT(g.reviewid) reviewCount
-                        FROM genres g, reviews r
-                        WHERE g.reviewid = r.reviewid AND r.pub_year = ` + year + `
+                        FROM genres g
+                        JOIN reviews r
+                        ON g.reviewid = r.reviewid
+                        WHERE r.pub_year = ` + year + `
                         GROUP BY g.genre
                         HAVING COUNT(g.reviewid) = (
                             SELECT MIN(genrecount)
                                 FROM (
                         SELECT COUNT(g.reviewid) genrecount
-                                    FROM genres g, reviews r
-                                    WHERE g.reviewid = r.reviewid AND r.pub_year = ` + year + `
+                                    FROM genres g
+                                    JOIN reviews r
+                                    ON g.reviewid = r.reviewid
+                                    WHERE r.pub_year = ` + year + `
                                     GROUP BY g.genre
                                     ) a )`;
         console.log(query);
