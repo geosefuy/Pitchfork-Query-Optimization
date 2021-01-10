@@ -6,7 +6,7 @@
 3. Go to SQL Editor section
 4. Uncheck Safe Updates (rejects UPDATEs and DELETEs with no restrictions)
 5. Connect to localhost instance
-6. Open MySQL Workbench and execute the following commands
+6. Execute the following commands
 ```
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';
 flush privileges;
